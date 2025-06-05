@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YGO Deck-Builder</title>
+
+  <!-- ---- Links fonts - Comfortaa, Righteous, REM, EB Garamond, Libre Baskerville, Quintessential and Twinkle Star ---- -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Quintessential&family=REM:ital,wght@0,100..900;1,100..900&family=Righteous&family=Twinkle+Star&display=swap" rel="stylesheet">
+  
+  <!-- ---- Links to files -->
+  <link rel="stylesheet" href="styles/styles.min.css">
+  <script defer src="./scripts/main.js"></script>
+
+  <!-- ---- Link font awesome ---- -->
+  <script src="https://kit.fontawesome.com/338ba07762.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class="Wrapper">
+    <h1>Yu-Gi-Oh! Deck-Builder</h1>
+    <form class="btn-group">
+      <button data-type="monster" class="monster">Monster</button>
+      <button data-type="spell" class="magic">Spell</button>
+      <button data-type="trap" class="trap">Trap</button>
+      <button data-type="" class="deck">Deck-Builder</button>
+    </form>
+    <form class="dataSearch">
+      <input type="text" placeholder="Name,level,race,type,attribute"><button>Search</button>
+    </form>
+    <div class="display-carte"></div>
+    
+    <div class="selection-carte"></div>
+    
+  </div>
+
+</body>
+</html>
