@@ -62,23 +62,16 @@ function displayCartes(cards) {
 
   // Limiter à 40 cartes maximum(Slice)
   cards.slice(0, 40).forEach((card) => {
-    const div = createElement(
-      "div",
-      "card",
-      `
-        <h3>${card.name}</h3>
+    const div = createElement("div","card",
+      `<h3>${card.name}</h3>
         <img src="${card.card_images[0].image_url}" alt="${card.name}" />
-        <button class="ajout">Ajouter au deck</button>
       `
     );
 
-    const btn = div.querySelector('.ajout');
-    btn.addEventListener("click", () => monDeck.push(card));
+    
 
     appendElement(displayCards, div);
   });
-
-  
 }
 
 
@@ -141,3 +134,11 @@ formBtn.addEventListener('click', async (e) => {
   }
 });
 
+
+
+
+
+
+dragula([document.querySelector(".display-carte"), document.querySelector(".selection-carte")], {
+  copy: true
+});

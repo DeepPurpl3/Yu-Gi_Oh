@@ -46,32 +46,52 @@ body {
 
     }
 }
-.display-carte {
-    margin: auto;
-    margin-top: 5%;
-    width: 50%;
-    display: grid;
-    grid-template-columns: repeat(4,1fr);
-    gap: 2rem;
-    color: aliceblue;
-    img {
-        height:max-content;
-        width: fit-content;
-        // aspect-ratio: 1/1;
-        box-shadow: 10px 5px 5px rgb(12, 1, 1);
-        border-radius: 15px;
-        &:hover {
-            transform: translateY(-14px);
-            transition: ease-in-out .3s;
+.wropper {
+    // display: flex;
+    // gap: 1rem;
+
+
+    .display-carte {
+        margin: auto;
+        margin-top: 5%;
+        width: 50%;
+        display: grid;
+        grid-template-columns: repeat(4,1fr);
+        gap: 2rem;
+        color: aliceblue;
+        img {
+            height:max-content;
+            width: fit-content;
+            // aspect-ratio: 1/1;
+            box-shadow: 10px 5px 5px rgb(12, 1, 1);
+            border-radius: 15px;
+            &:hover {
+                transform: translateY(-14px);
+                transition: ease-in-out .3s;
+            }
+        }
+        .ajout {
+            background-color: crimson;
+            border-radius: 15px;
+            
+        }
+        .popup {
+            position: fixed;
+            
         }
     }
-    .ajout {
-        background-color: crimson;
-        border-radius: 15px;
-        
+    .selection-carte {
+        gap: 2px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        flex-direction: column;
+        border: 10px solid white;
     }
-    .popup {
-        position: fixed;
-        
-    }
-}
+    
+   &.visible {
+     display: grid;
+     grid-template-columns: repeat(6, 1fr);
+     gap: 1rem;
+     margin-top: 2rem;
+   }
+} 
