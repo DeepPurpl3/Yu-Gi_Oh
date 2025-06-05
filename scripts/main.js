@@ -7,6 +7,7 @@ const btnMonster   = document.querySelector(".monster");
 const btnMagic     = document.querySelector(".magic");
 const btnTrap      = document.querySelector(".trap");
 const btnDeck      = document.querySelector(".deck");
+
 // ======= Variable ======
 let monDeck = [];
 // ===================================
@@ -39,44 +40,68 @@ async function getApi(type = "") {
         const response = await fetch(url);
         const data = await response.json();
         
-        console.log(data.data[0].desc);
-        console.log(data.data[0].name);
+        // console.log(data.data[0].desc);
+        // console.log(data.data[0].name);
         console.log(data.data[0].type);
         console.log(data.data[0].archetype);
         console.log(data.data[0].race);
-        console.log(data.data[0]);
-        console.log(data.data);
+        // console.log(data.data[0]);
+        // console.log(data.data);
         
     
     return data;
 } catch (error) {
-    console.error(error);
+    // console.error(error);
 }
 }
 getApi();
 
 // Afficher Les cartes
 function displayCartes(cards) {
-  // ici cards est un tableau d’objets (chaque objet = 1 carte)
   displayCards.innerHTML = "";
 
-  cards.forEach((card) => {
-    // ici, card représente 1 seule carte
+  // Limiter à 40 cartes maximum(Slice)
+  cards.slice(0, 40).forEach((card) => {
     const div = createElement(
       "div",
       "card",
       `
-    <h3>${card.name}</h3>
-    <img src="${card.card_images[0].image_url}" alt="${card.name}" />
-    <button class="ajout">Ajouter au deck</button>
-  `
+        <h3>${card.name}</h3>
+        <img src="${card.card_images[0].image_url}" alt="${card.name}" />
+        <button class="ajout">Ajouter au deck</button>
+      `
     );
+
+    const btn = div.querySelector('.ajout');
+    btn.addEventListener("click", () => monDeck.push(card));
+
     appendElement(displayCards, div);
   });
+
+  
 }
+
+
+function afficherDeck() {
+// capture de le div qui va stocker + afficher le deck
+  const deckZone = document.querySelector('.selection-carte');
+  deckZone.innerHTML = ""; // on vide avant de réafficher
+
+  monDeck.forEach((card,index) => {
+    const div = createElement("div","card",
+    `<h3>${card.name}</h3>
+    <img src="${card.card_images[0].image_url}" alt="${card.name}" />
+    <button class="retirer" data-index="${index}">Retirer</button>`);
+
+    deckZone.appendChild(div)
+  });
+
+}
+
 // ==================
 //  🧲 Événements 🧲 
 // ==================
+//cette ligne doit etre revue MO!! 
 document.querySelector(".dataSearch").addEventListener("submit", (e) => {
   e.preventDefault();
   const searchValue = e.target.querySelector("input").value.trim();
@@ -92,14 +117,27 @@ document.querySelector(".dataSearch").addEventListener("submit", (e) => {
     }
 });
 
-// Les Boutons Des Categories
+// Les Boutons pour les diff categories de cartes YGO
 formBtn.addEventListener('click', async (e) => {
   e.preventDefault();
   if (e.target.matches('button')) {
     const category = e.target.dataset.type;
-    console.log(`Mon bouton catégorie ${category}`);
 
-    const data = await getApi(category);
-    console.log(data);
+    // 🛠️ Pour les monstres, on appelle l'API sans paramètre et on filtre localement
+    const data = await getApi(category === "Monster" ? "" : category);
+    if (!data || !data.data) return;
+
+    let filteredCards = [];
+
+    if (category === "Monster") {
+      filteredCards = data.data.filter(card => card.type.includes("Monster"));
+    } else {
+      filteredCards = data.data.filter(card => card.type === category);
+    }
+
+    if (filteredCards.length) {
+      displayCartes(filteredCards);
+    }
   }
-})
+});
+
