@@ -50,7 +50,7 @@ body {
     margin-top: 5%;
     width: 85%;
     display: grid;
-    grid-template-columns: repeat(5,1fr);
+    grid-template-columns: repeat(4,1fr);
     gap: 2rem;
     color: aliceblue;
     img {
@@ -63,5 +63,11 @@ body {
             transform: translateY(-14px);
             transition: ease-in-out .3s;
         }
+    }
+    .ajout {
+        background-color: crimson;
+        border-radius: 15px;
+        padding: 1rem 2rem;
+        top: 0%;
     }
 }

@@ -31,20 +31,22 @@ function appendElement(parent, child) {
 // =======================
 //   ==== CALL API =====
 // =======================
-async function getApi() {
+async function getApi(type = "") {
     try {
-        const response = await fetch(
-            `https://db.ygoprodeck.com/api/v7/cardinfo.php`
-            );
-            const data = await response.json();
-            
-            console.log(data.data[0].desc);
-            console.log(data.data[0].name);
-            console.log(data.data[0].type);
-            console.log(data.data[0].archetype);
-            console.log(data.data[0].race);
-            console.log(data.data[0]);
-            console.log(data.data);
+      const url = type
+      ? `https://db.ygoprodeck.com/api/v7/cardinfo.php?type=${type}`
+      : `https://db.ygoprodeck.com/api/v7/cardinfo.php`;
+        const response = await fetch(url);
+        const data = await response.json();
+        
+        console.log(data.data[0].desc);
+        console.log(data.data[0].name);
+        console.log(data.data[0].type);
+        console.log(data.data[0].archetype);
+        console.log(data.data[0].race);
+        console.log(data.data[0]);
+        console.log(data.data);
+        
     
     return data;
 } catch (error) {
@@ -52,26 +54,6 @@ async function getApi() {
 }
 }
 getApi();
-
-
-async function getApiFiltered(type) {
-    try {
-      const response = await fetch(`https://db.ygoprodeck.com/api/v7/cardinfo.php?type=${type}`);
-      const data = await response.json();
-      console.log(data.data);
-      return(data.data)
-    //   displayCartes(data.data); // j utilise la fonction d'affichage ici
-    } catch (error) {
-      console.error(error);
-    }
-  }
-  // getApiFiltered();
-
-
-
-
-
-
 
 // Afficher Les cartes
 function displayCartes(cards) {
@@ -86,6 +68,7 @@ function displayCartes(cards) {
       `
     <h3>${card.name}</h3>
     <img src="${card.card_images[0].image_url}" alt="${card.name}" />
+    <button class="ajout">Ajouter au deck</button>
   `
     );
     appendElement(displayCards, div);
@@ -109,10 +92,14 @@ document.querySelector(".dataSearch").addEventListener("submit", (e) => {
     }
 });
 
-
-formBtn.addEventListener('click', (e) => {
+// Les Boutons Des Categories
+formBtn.addEventListener('click', async (e) => {
   e.preventDefault();
   if (e.target.matches('button')) {
-    const category = e.target.dataset
+    const category = e.target.dataset.type;
+    console.log(`Mon bouton catégorie ${category}`);
+
+    const data = await getApi(category);
+    console.log(data);
   }
 })
