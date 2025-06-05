@@ -136,9 +136,6 @@ formBtn.addEventListener('click', async (e) => {
 
 
 
-
-
-
 dragula([document.querySelector(".display-carte"), document.querySelector(".selection-carte")], {
   copy: true
 });
