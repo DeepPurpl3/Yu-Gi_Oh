@@ -22,7 +22,7 @@ body {
     }
     .btn-group {
         display: flex;
-        flex-direction: column;
+        // flex-direction: column; 
         width: 15%;
         gap: 2rem;
         font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
@@ -55,7 +55,7 @@ body {
     display: flex;
     // gap: 1rem;
     .display-carte {
-        // margin: auto;
+        margin-left: 6%;
         margin-top: 5%;
         width: 60%;
         display: grid;
