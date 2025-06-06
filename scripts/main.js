@@ -45,9 +45,6 @@ async function getApi(type = "") {
         console.log(data.data[0].type);
         console.log(data.data[0].archetype);
         console.log(data.data[0].race);
-        // console.log(data.data[0]);
-        // console.log(data.data);
-        
     
     return data;
 } catch (error) {
@@ -63,12 +60,12 @@ function displayCartes(cards) {
   // Limiter à 40 cartes maximum(Slice)
   cards.slice(0, 40).forEach((card) => {
     const div = createElement("div","card",
-      `<h3>${card.name}</h3>
+      `
         <img src="${card.card_images[0].image_url}" alt="${card.name}" />
       `
     );
 
-    
+    // <h3>${card.name}</h3>
 
     appendElement(displayCards, div);
   });
@@ -82,13 +79,14 @@ function afficherDeck() {
 
   monDeck.forEach((card,index) => {
     const div = createElement("div","card",
-    `<h3>${card.name}</h3>
+    `
+    
     <img src="${card.card_images[0].image_url}" alt="${card.name}" />
-    <button class="retirer" data-index="${index}">Retirer</button>`);
+    `);
 
     deckZone.appendChild(div)
   });
-
+// <h3>${card.name}</h3>
 }
 
 // ==================
